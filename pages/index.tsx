@@ -83,7 +83,6 @@ const wrapperGrid = css({
 
 const IndexPage = (props: Props) => {
   const { posts } = props;
-
   return (
     <Layout footer header headerProps={{ offsetHeight: 256 }}>
       <Grid columns="medium" gapX={4} gapY={12} className={wrapperGrid()}>
@@ -122,21 +121,40 @@ const IndexPage = (props: Props) => {
           <NewsletterForm large />
         </section>
         <section>
-          <H2>Featured</H2>
+          <H2>All articles</H2>
           <Grid
             as="ul"
             css={{
-              marginLeft: '0px',
-              marginBottom: '0px',
-              padding: '0px',
+              margin: 0,
+              padding: 0,
             }}
-            data-testid="featured-list"
-            gapY={4}
+            data-testid="article-list"
+            gapY={1}
           >
-            {posts
-              .filter((post) => post.featured)
-              .map((post) => {
-                return (
+            {posts.map((post) => {
+              const currentYear = new Date(post.date).getFullYear();
+              let printYear;
+
+              if (currentYear !== year) {
+                printYear = true;
+                year = currentYear;
+              } else {
+                printYear = false;
+              }
+
+              return (
+                <>
+                  {printYear ? (
+                    <Text
+                      as="p"
+                      weight="4"
+                      css={{
+                        paddingTop: '30px',
+                      }}
+                    >
+                      {currentYear}
+                    </Text>
+                  ) : null}
                   <motion.li
                     style={{
                       position: 'relative',
@@ -163,7 +181,9 @@ const IndexPage = (props: Props) => {
                       >
                         <Glow
                           css={{
-                            background: post.colorFeatured,
+                            background:
+                              post.colorFeatured ||
+                              'linear-gradient(90deg,#2E83FF -10%,#EB7D9F 50%, #FFCBBE 100%)',
                           }}
                           variants={glowVariants}
                           transition={{
@@ -205,90 +225,37 @@ const IndexPage = (props: Props) => {
                               gradient
                               css={{
                                 marginBottom: '8px',
-                                backgroundImage: post.colorFeatured!,
+                                backgroundImage:
+                                  post.colorFeatured! ||
+                                  'linear-gradient(90deg,#2E83FF -10%,#EB7D9F 50%, #FFCBBE 100%)',
                               }}
                             >
                               {post.title}
                             </H3>
-                            <Text as="p" css={{ marginBottom: '0px' }}>
+                            <Text as="p" css={{ marginBottom: '10px' }}>
                               {post.subtitle}
+                            </Text>
+                            <Text
+                              as="p"
+                              size="2"
+                              weight="3"
+                              css={{
+                                marginBottom: '0px',
+                                textAlign: 'right',
+                                color: 'black',
+                              }}
+                            >
+                              {format(
+                                new Date(Date.parse(post.date)),
+                                'MMM dd'
+                              )}
                             </Text>
                           </Card.Body>
                         </Card>
                       </a>
                     </Link>
                   </motion.li>
-                );
-              })}
-          </Grid>
-        </section>
-        <section>
-          <H2>All articles</H2>
-          <Grid
-            as="ul"
-            css={{
-              margin: 0,
-              padding: 0,
-            }}
-            data-testid="article-list"
-            gapY={1}
-          >
-            {posts.map((post) => {
-              const currentYear = new Date(post.date).getFullYear();
-              let printYear;
-
-              if (currentYear !== year) {
-                printYear = true;
-                year = currentYear;
-              } else {
-                printYear = false;
-              }
-
-              return (
-                <li
-                  style={{
-                    listStyle: 'none',
-                    cursor: 'pointer',
-                    marginBottom: 'calc(1.45rem / 2)',
-                    lineHeight: '1.9',
-                    letterSpacing: '0.3px',
-                  }}
-                  key={post.slug}
-                  data-testid="article-item"
-                >
-                  {printYear ? (
-                    <Text
-                      as="p"
-                      weight="4"
-                      css={{
-                        paddingTop: '30px',
-                      }}
-                    >
-                      {currentYear}
-                    </Text>
-                  ) : null}
-                  <Link href={`/posts/${post.slug}/`} passHref>
-                    {/* Revisit this component: merge Anchor and block together (extend block from Anchor) */}
-                    <a style={{ textDecoration: 'none', fontWeight: 500 }}>
-                      <Block data-testid="article-link">
-                        <Text
-                          as="p"
-                          size="1"
-                          variant="tertiary"
-                          weight="3"
-                          css={{
-                            minWidth: '52px',
-                            marginRight: '32px',
-                            marginBottom: '0px',
-                          }}
-                        >
-                          {format(new Date(Date.parse(post.date)), 'MMM dd')}
-                        </Text>
-                        {post.title}
-                      </Block>
-                    </a>
-                  </Link>
-                </li>
+                </>
               );
             })}
           </Grid>
