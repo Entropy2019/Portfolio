@@ -89,11 +89,9 @@ const IndexPage = (props: Props) => {
       <Grid columns="medium" gapX={4} gapY={12} className={wrapperGrid()}>
         <Box>
           <H1>
-            Hi <WavingHand /> I'm Maxime, and this is my blog.{' '}
+            Hi <WavingHand /> I'm Wang Yicheng, and this is my Portfolio.{' '}
             <Text variant="secondary" size="7" weight="4">
-              Here, I share through my writing my experience as a frontend
-              engineer and everything I'm learning about on React, Typescript,
-              SwiftUI, Serverless, and testing.
+              Here is my projects during eduction in ZJUT.
             </Text>
           </H1>
           <Flex
@@ -104,34 +102,23 @@ const IndexPage = (props: Props) => {
             }}
           >
             <a
-              href="https://maximeheckel.com"
+              href="https://github.com/Entropy2019"
               style={{ textDecoration: 'none' }}
               tabIndex={-1}
             >
-              <Button variant="secondary" endIcon={<Icon.External />}>
-                About me
+              <Button variant="secondary" endIcon={<Icon.Github />}>
+                @Entropy2019
               </Button>
               <VisuallyHidden as="p">
-                Link redirects to my portfolio https://maximeheckel.com.
-              </VisuallyHidden>
-            </a>
-            <a
-              href="https://twitter.com/MaximeHeckel"
-              style={{ textDecoration: 'none' }}
-              tabIndex={-1}
-            >
-              <Button variant="secondary" endIcon={<Icon.Twitter />}>
-                @MaximeHeckel
-              </Button>
-              <VisuallyHidden as="p">
-                Link redirects to my Twitter profile page
-                https://twitter.com/MaximeHeckel.
+                Link redirects to my Github profile page
+                https://github.com/Entropy2019.
               </VisuallyHidden>
             </a>
           </Flex>
         </Box>
+
         <section>
-          <H2>Newsletter</H2>
+          <H2>About Me</H2>
           <NewsletterForm large />
         </section>
         <section>
@@ -305,15 +292,6 @@ const IndexPage = (props: Props) => {
               );
             })}
           </Grid>
-          <br />
-          <Card>
-            <Card.Body>
-              <H3>#BlackLivesMatter</H3>
-              <Anchor underline href="https://blacklivesmatters.carrd.co/">
-                Click here to find out how you can help.
-              </Anchor>
-            </Card.Body>
-          </Card>
         </section>
       </Grid>
     </Layout>
