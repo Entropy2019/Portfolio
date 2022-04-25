@@ -26,6 +26,12 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/prop-types': 0,
     'no-console': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
   settings: {
     react: {
