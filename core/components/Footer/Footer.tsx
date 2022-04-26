@@ -43,7 +43,7 @@ const Footer = () => (
     <hr />
     <Grid columns="medium" gapX={4}>
       <FooterWrapper direction="column" justifyContent="space-evenly" gap={6}>
-        <Grid columns={3} css={{ width: '100%' }}>
+        <Grid columns={2} css={{ width: '100%' }}>
           <Box>
             <Text size={1}>
               <Grid>
@@ -53,9 +53,6 @@ const Footer = () => (
                 <Link href="/design" passHref>
                   <Anchor discreet>Design</Anchor>
                 </Link>
-                <Link href="/rss.xml" passHref>
-                  <Anchor discreet>RSS</Anchor>
-                </Link>
               </Grid>
             </Text>
           </Box>
@@ -64,48 +61,15 @@ const Footer = () => (
               <Grid>
                 <Anchor
                   discreet
-                  href="https://twitter.com/MaximeHeckel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Twitter
-                </Anchor>
-                <Anchor
-                  discreet
-                  href="https://github.com/MaximeHeckel"
+                  href="https://github.com/Entropy2019"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Github
                 </Anchor>
-                <Anchor
-                  discreet
-                  href="https://buttondown.email/MaximeHeckel/archive/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Newsletter
-                </Anchor>
-              </Grid>
-            </Text>
-          </Box>
-          <Box>
-            <Text size={1}>
-              <Grid>
-                <Anchor
-                  discreet
-                  href="https://maximeheckel.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Portfolio
-                </Anchor>
-                <Anchor
-                  discreet
-                  href="https://www.figma.com/file/uvkUCtxXs7Vvmj58sHh0TE/Maxime's-Public-Roadmap?node-id=0%3A1"
-                >
-                  Roadmap
-                </Anchor>
+                <Link href="/project" passHref>
+                  <Anchor discreet>Project</Anchor>
+                </Link>
               </Grid>
             </Text>
           </Box>
@@ -118,8 +82,7 @@ const Footer = () => (
             variant="primary"
             weight="3"
           >
-            © {new Date().getFullYear()} Maxime Heckel ——{' '}
-            <EM size="1">New York</EM>
+            © {new Date().getFullYear()} Wang Yicheng —— <EM size="1">ZJU</EM>
           </Text>
           <Logo alt="Maxime Heckel's logo" size={35} />
         </FooterContent>
