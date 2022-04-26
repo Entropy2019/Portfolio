@@ -134,7 +134,6 @@ const IndexPage = (props: Props) => {
             {posts.map((post) => {
               const currentYear = new Date(post.date).getFullYear();
               let printYear;
-
               if (currentYear !== year) {
                 printYear = true;
                 year = currentYear;
@@ -143,7 +142,7 @@ const IndexPage = (props: Props) => {
               }
 
               return (
-                <>
+                <Box key={post.slug}>
                   {printYear ? (
                     <Text
                       as="p"
@@ -151,6 +150,7 @@ const IndexPage = (props: Props) => {
                       css={{
                         paddingTop: '30px',
                       }}
+                      key={currentYear}
                     >
                       {currentYear}
                     </Text>
@@ -166,7 +166,6 @@ const IndexPage = (props: Props) => {
                       lineHeight: '1.9',
                       letterSpacing: '0.3px',
                     }}
-                    key={post.slug}
                     data-testid="featured-article-item"
                     initial="initial"
                     whileHover="hover"
@@ -255,7 +254,7 @@ const IndexPage = (props: Props) => {
                       </a>
                     </Link>
                   </motion.li>
-                </>
+                </Box>
               );
             })}
           </Grid>

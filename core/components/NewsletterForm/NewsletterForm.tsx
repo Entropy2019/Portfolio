@@ -148,6 +148,7 @@ const NewsletterForm = (props: Props) => {
               width={923}
               height={1154}
               layout="responsive"
+              priority
             />
           </Box>
         </Flex>
