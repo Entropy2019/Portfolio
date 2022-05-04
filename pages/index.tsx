@@ -20,6 +20,7 @@ import Link from 'next/link';
 import Grid from '@theme/components/Grid';
 import Card from '@theme/components/Card';
 import Layout from '@theme/layout';
+import ProjectCard from '@theme/components/ProjectCard';
 import { getAllFilesFrontMatter } from 'lib/mdx';
 import { Post, PostType } from 'types/post';
 
@@ -81,6 +82,23 @@ const wrapperGrid = css({
   },
 });
 
+const projects = [
+  {
+    imgSrc: 'project1.png',
+    projectName: 'project1',
+    projectSlug: 'project1',
+    backgroundImage:
+      'linear-gradient(235deg,hsl(240deg 100% 85%) 0%,hsl(274deg 85% 83%) 11%,hsl(310deg 85% 83%) 22%,hsl(327deg 100% 84%) 33%,hsl(344deg 100% 85%) 44%,hsl(6deg 100% 86%) 56%,hsl(24deg 100% 83%) 67%,hsl(36deg 100% 81%) 78%,hsl(46deg 100% 81%) 89%,hsl(55deg 100% 82%) 100%)',
+  },
+  {
+    imgSrc: 'project2.jpg',
+    projectName: 'project2',
+    projectSlug: 'project2',
+    backgroundImage:
+      'linear-gradient(240deg,hsl(185deg 46% 90%) 0%,hsl(191deg 61% 89%) 11%,hsl(197deg 76% 88%) 22%,hsl(202deg 91% 88%) 33%,hsl(206deg 100% 89%) 44%,hsl(211deg 100% 89%) 56%,hsl(220deg 100% 90%) 67%,hsl(234deg 100% 91%) 78%,hsl(255deg 100% 91%) 89%,hsl(273deg 100% 90%) 100%)',
+  },
+];
+
 const IndexPage = (props: Props) => {
   const { posts } = props;
   return (
@@ -119,6 +137,99 @@ const IndexPage = (props: Props) => {
         <section>
           <H2>About Me</H2>
           <NewsletterForm large />
+        </section>
+        <section>
+          <H2>Projects</H2>
+          <Grid
+            as="ul"
+            css={{
+              margin: 0,
+              padding: 0,
+            }}
+            data-testid="article-list"
+            gapY={6}
+          >
+            {projects.map((project) => {
+              const {
+                imgSrc,
+                projectName,
+                projectSlug,
+                backgroundImage,
+              } = project;
+              return (
+                <motion.li
+                  style={{
+                    position: 'relative',
+                    marginLeft: '-var(--space-1)',
+                    marginRight: '-var(--space-1)',
+                    listStyle: 'none',
+                    cursor: 'pointer',
+                    marginBottom: 'calc(1.45rem / 2)',
+                    lineHeight: '1.9',
+                    letterSpacing: '0.3px',
+                  }}
+                  key={projectSlug}
+                  data-testid="featured-article-item"
+                  initial="initial"
+                  whileHover="hover"
+                >
+                  <Link href={`/projects/${projectSlug}/`}>
+                    <a
+                      style={{
+                        textDecoration: 'none',
+                        color: 'var(--maximeheckel-colors-typeface-secondary)',
+                      }}
+                    >
+                      <Glow
+                        css={{
+                          background: backgroundImage,
+                        }}
+                        variants={glowVariants}
+                        transition={{
+                          type: 'tween',
+                          ease: 'easeOut',
+                          duration: 0.4,
+                        }}
+                      />
+                      <Box
+                        css={{
+                          height: '95%',
+                          width: '105%',
+                          position: 'absolute',
+                          borderRadius: 'var(--border-radius-2)',
+                          top: '50%',
+                          left: '50%',
+                          background: 'var(--maximeheckel-colors-body)',
+                          transform: 'translateY(-50%) translateX(-50%)',
+                          filter: 'blur(20px)',
+                          transition: '0.5s',
+
+                          '@media(max-width: 700px)': {
+                            display: 'none',
+                          },
+                        }}
+                      />
+                      <Card<MotionProps>
+                        as={motion.div}
+                        variants={cardVariants}
+                        transition={{
+                          type: 'tween',
+                          ease: 'easeOut',
+                          duration: 0.4,
+                        }}
+                        depth={1}
+                      >
+                        <ProjectCard
+                          imgSrc={imgSrc}
+                          projectName={projectName}
+                        />
+                      </Card>
+                    </a>
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </Grid>
         </section>
         <section>
           <H2>All articles</H2>
